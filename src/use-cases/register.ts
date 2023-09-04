@@ -1,3 +1,4 @@
+import { PetsRepository } from '@/repositories/pet-repository'
 import { PrismaPetsRepository } from '@/repositories/prisma-pet-repository'
 
 interface RegisterPetUseCaseRequest {
@@ -10,7 +11,7 @@ interface RegisterPetUseCaseRequest {
 }
 
 export class RegisterUseCase {
-  constructor(private petsRepository: any) {}
+  constructor(private petsRepository: PetsRepository) {}
 
   async execute({
     name,
