@@ -9,22 +9,26 @@ interface RegisterPetUseCaseRequest {
   organizationId?: string
 }
 
-export async function registerPetUseCase({
-  name,
-  age,
-  breed,
-  description,
-  city,
-  organizationId,
-}: RegisterPetUseCaseRequest) {
-  const PrismaPetRepository = new PrismaPetsRepository()
+export class RegisterUseCase {
+  constructor(private petsRepository: any) {}
 
-  await PrismaPetRepository.create({
+  async execute({
     name,
     age,
     breed,
     description,
     city,
     organizationId,
-  })
+  }: RegisterPetUseCaseRequest) {
+    const petsRepository = new PrismaPetsRepository()
+
+    await petsRepository.create({
+      name,
+      age,
+      breed,
+      description,
+      city,
+      organizationId,
+    })
+  }
 }

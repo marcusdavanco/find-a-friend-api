@@ -1,4 +1,5 @@
-import { registerPetUseCase } from '@/use-cases/register'
+import { PrismaPetsRepository } from '@/repositories/prisma-pet-repository'
+import { RegisterUseCase } from '@/use-cases/register'
 import { FastifyRequest, FastifyReply } from 'fastify'
 import { z } from 'zod'
 
@@ -16,7 +17,10 @@ export async function register(request: FastifyRequest, reply: FastifyReply) {
     registerBodySchema.parse(request.body)
 
   try {
-    await registerPetUseCase({
+    const petsRepository = new PrismaPetsRepository()
+    const registerUseCase = new RegisterUseCase(petsRepository)
+
+    await registerUseCase.execute({
       name,
       age,
       breed,
@@ -25,7 +29,9 @@ export async function register(request: FastifyRequest, reply: FastifyReply) {
       organizationId,
     })
   } catch (err) {
-    return reply.status(409).send()
+    if (err instanceof Error) {
+      throw err
+    }
   }
 
   return reply.status(201).send()
