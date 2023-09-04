@@ -13,6 +13,8 @@ model User {
   password_hash  String
   org            Organization? @relation(fields: [organizationId], references: [id])
   organizationId String?
+
+  @@map("users")
 }
 
 model Organization {
@@ -22,6 +24,8 @@ model Organization {
   phone   String
   user    User[]
   pets    Pet[]
+
+  @@map("organizations")
 }
 
 model Pet {
@@ -33,4 +37,6 @@ model Pet {
   city           String
   org            Organization? @relation(fields: [organizationId], references: [id])
   organizationId String?
+
+  @@map("pets")
 }
