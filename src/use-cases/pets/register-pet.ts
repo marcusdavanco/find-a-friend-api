@@ -10,7 +10,7 @@ interface RegisterPetUseCaseRequest {
   organizationId?: string
 }
 
-export class RegisterUseCase {
+export class RegisterPetUseCase {
   constructor(private petsRepository: PetsRepository) {}
 
   async execute({

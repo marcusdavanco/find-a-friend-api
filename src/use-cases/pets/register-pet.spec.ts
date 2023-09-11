@@ -1,17 +1,17 @@
 import { InMemoryPetsRepository } from '@/repositories/in-memory.ts/in-memory-repository'
 import { describe, expect, it, beforeEach } from 'vitest'
-import { RegisterUseCase } from './register'
+import { RegisterPetUseCase } from './register-pet'
 
 let petsRepository: InMemoryPetsRepository
-let sut: RegisterUseCase
+let sut: RegisterPetUseCase
 
-describe('Register Use Case', () => {
+describe('Register Pet Use Case', () => {
   beforeEach(() => {
     petsRepository = new InMemoryPetsRepository()
-    sut = new RegisterUseCase(petsRepository)
+    sut = new RegisterPetUseCase(petsRepository)
   })
 
-  it('should be able to register', async () => {
+  it('should be able to register a pet', async () => {
     const { pet } = await sut.execute({
       name: 'Rocco',
       age: 1,

@@ -22,4 +22,16 @@ export class InMemoryPetsRepository implements PetsRepository {
       resolve(pet)
     })
   }
+
+  async list() {
+    return new Promise<Pet[]>((resolve) => {
+      resolve(this.pets)
+    })
+  }
+
+  listByCity(city: string) {
+    return new Promise<Pet[]>((resolve) => {
+      resolve(this.pets.filter((pet) => pet.city === city))
+    })
+  }
 }
