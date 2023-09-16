@@ -1,6 +1,4 @@
-import { PrismaPetsRepository } from '@/repositories/prisma-pet-repository'
 import { makeRegisterUseCase } from '@/use-cases/factories/make-register-use-case'
-import { RegisterUseCase } from '@/use-cases/register'
 import { FastifyRequest, FastifyReply } from 'fastify'
 import { z } from 'zod'
 

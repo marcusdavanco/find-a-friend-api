@@ -1,6 +1,17 @@
 import { PetsRepository } from '@/repositories/pet-repository'
-import { PrismaPetsRepository } from '@/repositories/prisma/prisma-pet-repository'
+
+interface FetchPetsUseCaseRequest {
+  city: string
+}
 
 export class FetchPetsUseCase {
   constructor(private petsRepository: PetsRepository) {}
+
+  async execute({ city }: FetchPetsUseCaseRequest) {
+    const pets = await this.petsRepository.list(city)
+
+    return {
+      pets,
+    }
+  }
 }
