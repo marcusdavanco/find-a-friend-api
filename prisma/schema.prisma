@@ -28,9 +28,23 @@ model Organization {
   @@map("organizations")
 }
 
+enum Species {
+  DOG
+  CAT
+}
+
+enum Size {
+  SMALL
+  MEDIUM
+  BIG
+}
+
 model Pet {
   id             String        @id @default(uuid())
   name           String
+  weight         Decimal
+  species        Species
+  size           Size
   age            Int
   breed          String
   description    String?
