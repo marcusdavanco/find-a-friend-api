@@ -34,21 +34,36 @@ enum Species {
 }
 
 enum Size {
-  SMALL
-  MEDIUM
-  BIG
+  PEQUENINO
+  PEQUENO
+  MEDIO
+  GRANDE
+  GIGANTE
+}
+
+enum Age {
+  FILHOTE
+  JOVEM
+  ADULTO
+  IDOSO
+}
+
+enum Independency {
+  BAIXO
+  MEDIO
+  ALTO
 }
 
 model Pet {
-  id             String        @id @default(uuid())
-  name           String
-  weight         Decimal
-  species        Species
-  size           Size
-  age            Int
-  breed          String
-  description    String?
-  city           String
+  id           String       @id @default(uuid())
+  name         String
+  species      Species
+  size         Size
+  age          Age
+  independency Independency
+  description  String?
+  city         String
+
   org            Organization? @relation(fields: [organizationId], references: [id])
   organizationId String?
   available      Boolean       @default(true)

@@ -1,3 +1,4 @@
+import { Size } from '@prisma/client'
 import { app } from './app'
 import { env } from '@/env'
 

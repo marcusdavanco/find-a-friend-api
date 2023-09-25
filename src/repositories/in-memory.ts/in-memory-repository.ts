@@ -1,5 +1,5 @@
 import { Prisma, Pet } from '@prisma/client'
-import { PetsRepository } from '../pet-repository'
+import { PetsRepository, QueryParams } from '../pet-repository'
 import { randomUUID } from 'crypto'
 
 export class InMemoryPetsRepository implements PetsRepository {
@@ -23,9 +23,29 @@ export class InMemoryPetsRepository implements PetsRepository {
     })
   }
 
-  list(city: string) {
+  async list(city: string) {
     return new Promise<Pet[]>((resolve) => {
       resolve(this.pets.filter((pet) => pet.city === city))
     })
+  }
+
+  async searchMany(query: QueryParams, page: number) {
+    const pageSize = 20
+    const { size, age, species, independency } = query
+
+    const filteredPets = this.pets.filter((pet) => {
+      return (
+        (!size || pet.size === size) &&
+        (!age || pet.age === age) &&
+        (!species || pet.species === species) &&
+        (!independency || pet.independency === independency)
+      )
+    })
+
+    const startIndex = (page - 1) * pageSize
+    const endIndex = startIndex + pageSize
+    const paginatedPets = filteredPets.slice(startIndex, endIndex)
+
+    return paginatedPets
   }
 }
