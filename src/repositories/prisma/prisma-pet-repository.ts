@@ -25,7 +25,7 @@ export class PrismaPetsRepository implements PetsRepository {
     return pets
   }
 
-  async searchMany(query: QueryParams, page: number) {
+  async searchMany(query: QueryParams, city: string, page: number) {
     const pageSize = 20
 
     const { size, age, species, independency } = query
@@ -41,6 +41,9 @@ export class PrismaPetsRepository implements PetsRepository {
               Independency[independency as keyof typeof Independency],
           },
         ],
+        AND: {
+          city,
+        },
       },
       take: pageSize,
       skip: (page - 1) * pageSize,

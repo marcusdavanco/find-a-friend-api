@@ -6,5 +6,5 @@ export type QueryParams = {
 export interface PetsRepository {
   create(data: Prisma.PetUncheckedCreateInput): Promise<Pet>
   list(city: string, page: number): Promise<Pet[]>
-  searchMany(query: QueryParams, page: number): Promise<Pet[]>
+  searchMany(query: QueryParams, city: string, page: number): Promise<Pet[]>
 }

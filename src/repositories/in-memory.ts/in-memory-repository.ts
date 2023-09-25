@@ -10,11 +10,14 @@ export class InMemoryPetsRepository implements PetsRepository {
       const pet = {
         id: randomUUID(),
         name: data.name,
+        species: data.species,
+        size: data.size,
         age: data.age,
-        breed: data.breed,
+        independency: data.independency,
         description: data.description ?? null,
         city: data.city,
         organizationId: data.organizationId ?? null,
+        available: data.available || true,
       }
 
       this.pets.push(pet)
@@ -35,22 +38,21 @@ export class InMemoryPetsRepository implements PetsRepository {
     })
   }
 
-  async searchMany(query: QueryParams, page: number) {
+  async searchMany(query: QueryParams, city: string, page: number) {
     const pageSize = 20
     const { size, age, species, independency } = query
 
-    const filteredPets = this.pets.filter((pet) => {
+    const pets = this.pets.filter((pet) => {
       return (
-        (!size || pet.size === size) &&
-        (!age || pet.age === age) &&
-        (!species || pet.species === species) &&
-        (!independency || pet.independency === independency)
+        pet.city === city &&
+        (size === undefined || pet.size === size) &&
+        (age === undefined || pet.age === age) &&
+        (species === undefined || pet.species === species) &&
+        (independency === undefined || pet.independency === independency)
       )
     })
 
-    const startIndex = (page - 1) * pageSize
-    const endIndex = startIndex + pageSize
-    const paginatedPets = filteredPets.slice(startIndex, endIndex)
+    const paginatedPets = pets.slice((page - 1) * pageSize, page * pageSize)
 
     return paginatedPets
   }
