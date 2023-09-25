@@ -23,9 +23,15 @@ export class InMemoryPetsRepository implements PetsRepository {
     })
   }
 
-  async list(city: string) {
+  async list(city: string, page: number) {
+    const pageSize = 20
+
     return new Promise<Pet[]>((resolve) => {
-      resolve(this.pets.filter((pet) => pet.city === city))
+      resolve(
+        this.pets
+          .filter((pet) => pet.city === city)
+          .slice((page - 1) * pageSize, page * pageSize),
+      )
     })
   }
 
