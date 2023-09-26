@@ -3,6 +3,16 @@ import { Age, Independency, Prisma, Size, Species } from '@prisma/client'
 import { PetsRepository, QueryParams } from '../pet-repository'
 
 export class PrismaPetsRepository implements PetsRepository {
+  async findById(id: string) {
+    const pet = await prisma.pet.findFirstOrThrow({
+      where: {
+        id,
+      },
+    })
+
+    return pet
+  }
+
   async create(data: Prisma.PetUncheckedCreateInput) {
     const pet = await prisma.pet.create({
       data,

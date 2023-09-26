@@ -1,9 +1,17 @@
-import { Prisma, Pet } from '@prisma/client'
+import { Prisma, Pet, $Enums } from '@prisma/client'
 import { PetsRepository, QueryParams } from '../pet-repository'
 import { randomUUID } from 'crypto'
 
 export class InMemoryPetsRepository implements PetsRepository {
   public pets: Pet[] = []
+
+  async findById(id: string) {
+    const index = this.pets.findIndex((pet) => pet.id === id)
+
+    return new Promise<Pet>((resolve) => {
+      resolve(this.pets[index])
+    })
+  }
 
   async create(data: Prisma.PetUncheckedCreateInput): Promise<Pet> {
     return new Promise((resolve) => {
