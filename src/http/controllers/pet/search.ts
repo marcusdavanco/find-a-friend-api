@@ -1,23 +1,25 @@
-import { makeFetchPetsUseCase } from '@/use-cases/factories/make-fetch-pets-use-case'
+import { makeSearchPetsUseCase } from '@/use-cases/factories/make-search-pets-use-case'
 import { FastifyRequest, FastifyReply } from 'fastify'
 import { z } from 'zod'
 
 export async function fetch(request: FastifyRequest, reply: FastifyReply) {
-  const fetchParamsSchema = z.object({
+  const searchPetsQueryParams = z.object({
     city: z.string(),
   })
 
-  const fetchQuerySchema = z.object({
+  const searchPetsQuerySchema = z.object({
+    q: z.string(),
     page: z.coerce.number().min(1).default(1),
   })
 
-  const { city } = fetchParamsSchema.parse(request.params)
-  const { page } = fetchQuerySchema.parse(request.query)
+  const { city } = searchPetsQueryParams.parse(request.params)
+  const { q, page } = searchPetsQuerySchema.parse(request.query)
 
   try {
-    const fetchUseCase = makeFetchPetsUseCase()
+    const searchPetsUseCase = makeSearchPetsUseCase()
 
-    const { pets } = await fetchUseCase.execute({
+    const { pets } = await searchPetsUseCase.execute({
+      query: q,
       city,
       page,
     })

@@ -1,4 +1,4 @@
-import { makeRegisterUseCase } from '@/use-cases/factories/make-register-use-case'
+import { makeRegisterPetsUseCase } from '@/use-cases/factories/make-register-pets-use-case'
 import { FastifyRequest, FastifyReply } from 'fastify'
 import { z } from 'zod'
 
@@ -16,7 +16,7 @@ export async function register(request: FastifyRequest, reply: FastifyReply) {
     registerBodySchema.parse(request.body)
 
   try {
-    const registerUseCase = makeRegisterUseCase()
+    const registerUseCase = makeRegisterPetsUseCase()
 
     await registerUseCase.execute({
       name,
