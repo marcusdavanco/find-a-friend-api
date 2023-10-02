@@ -2,7 +2,7 @@ import { makeGetPetsDetailsUseCase } from '@/use-cases/factories/make-get-pet-de
 import { FastifyRequest, FastifyReply } from 'fastify'
 import { z } from 'zod'
 
-export async function fetch(request: FastifyRequest, reply: FastifyReply) {
+export async function details(request: FastifyRequest, reply: FastifyReply) {
   const fetchParamsSchema = z.object({
     id: z.string(),
   })

@@ -8,16 +8,16 @@ datasource db {
 }
 
 model User {
-  id             String        @id @default(uuid())
-  email          String        @unique
-  password_hash  String
-  org            Organization? @relation(fields: [organizationId], references: [id])
-  organizationId String?
+  id            String  @id @default(uuid())
+  email         String  @unique
+  password_hash String
+  org           Org?    @relation(fields: [orgId], references: [id])
+  orgId         String?
 
   @@map("users")
 }
 
-model Organization {
+model Org {
   id      String @id @default(uuid())
   name    String
   address String
@@ -25,7 +25,7 @@ model Organization {
   user    User[]
   pets    Pet[]
 
-  @@map("organizations")
+  @@map("orgs")
 }
 
 enum Species {
@@ -64,9 +64,9 @@ model Pet {
   description  String?
   city         String
 
-  org            Organization? @relation(fields: [organizationId], references: [id])
-  organizationId String?
-  available      Boolean       @default(true)
+  org       Org?    @relation(fields: [orgId], references: [id])
+  orgId     String?
+  available Boolean @default(true)
 
   @@map("pets")
 }

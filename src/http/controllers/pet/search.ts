@@ -2,7 +2,7 @@ import { makeSearchPetsUseCase } from '@/use-cases/factories/make-search-pets-us
 import { FastifyRequest, FastifyReply } from 'fastify'
 import { z } from 'zod'
 
-export async function fetch(request: FastifyRequest, reply: FastifyReply) {
+export async function search(request: FastifyRequest, reply: FastifyReply) {
   const searchPetsQueryParams = z.object({
     city: z.string(),
   })
