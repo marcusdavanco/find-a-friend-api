@@ -1,4 +1,4 @@
-import { Prisma, Pet, $Enums } from '@prisma/client'
+import { Prisma, Pet } from '@prisma/client'
 import { PetsRepository, QueryParams } from '../pet-repository'
 import { randomUUID } from 'crypto'
 
@@ -24,7 +24,7 @@ export class InMemoryPetsRepository implements PetsRepository {
         independency: data.independency,
         description: data.description ?? null,
         city: data.city,
-        organizationId: data.organizationId ?? null,
+        orgId: data.orgId ?? null,
         available: data.available || true,
       }
 
