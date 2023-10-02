@@ -8,7 +8,7 @@ export async function fetch(request: FastifyRequest, reply: FastifyReply) {
   })
 
   const searchPetsQuerySchema = z.object({
-    q: z.string(),
+    q: z.record(z.string()),
     page: z.coerce.number().min(1).default(1),
   })
 

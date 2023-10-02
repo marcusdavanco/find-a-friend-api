@@ -2,8 +2,11 @@ import fastify from 'fastify'
 import { appRoutes } from './http/routes'
 import { ZodError } from 'zod'
 import { env } from './env'
+import { parse } from 'node:querystring'
 
-export const app = fastify()
+export const app = fastify({
+  querystringParser: (str) => parse(str.toLowerCase()),
+})
 
 app.register(appRoutes)
 
