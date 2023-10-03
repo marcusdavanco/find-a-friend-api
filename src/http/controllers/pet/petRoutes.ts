@@ -1,8 +1,6 @@
 import { FastifyInstance } from 'fastify'
 import { search } from './search'
 import { details } from './details'
-import { fetch } from './fetch'
-import { register } from './register'
 
 export async function petRoutes(app: FastifyInstance) {
   app.post('/pets', register)
