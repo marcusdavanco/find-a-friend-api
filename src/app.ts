@@ -3,11 +3,13 @@ import { ZodError } from 'zod'
 import { env } from './env'
 import { parse } from 'node:querystring'
 import { petRoutes } from './http/controllers/pet/petRoutes'
+import { orgRoutes } from './http/controllers/org/routes'
 
 export const app = fastify({
   querystringParser: (str) => parse(str.toLowerCase()),
 })
 
+app.register(orgRoutes)
 app.register(petRoutes)
 
 app.setErrorHandler((error, _, reply) => {
