@@ -2,7 +2,7 @@ import { Org, Prisma } from '@prisma/client'
 import { OrgsRepository } from '../org-repository'
 import { randomUUID } from 'crypto'
 
-export class inMemoryOrgRepository implements OrgsRepository {
+export class InMemoryOrgsRepository implements OrgsRepository {
   public orgs: Org[] = []
 
   async create({
