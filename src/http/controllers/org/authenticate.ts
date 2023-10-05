@@ -23,12 +23,22 @@ export async function authenticate(
     })
 
     const token = await reply.jwtSign({
+      /* RBAC requires this and the property role in the entity model.
+      {
+        role: user.role,
+      },
+      */
       sign: {
         sub: org.id,
       },
     })
 
     const refreshToken = await reply.jwtSign({
+      /* RBAC requires this and the property role in the entity model.
+      {
+        role: user.role,
+      },
+      */
       sign: {
         sub: org.id,
         expiresIn: '7d',
