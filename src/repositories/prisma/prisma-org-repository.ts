@@ -12,12 +12,18 @@ export class PrismaOrgsRepository implements OrgsRepository {
   }
 
   async findById(id: string) {
-    const org = await prisma.org.findFirstOrThrow({
+    return await prisma.org.findFirstOrThrow({
       where: {
         id,
       },
     })
+  }
 
-    return org
+  async findByEmail(email: string) {
+    return await prisma.org.findFirstOrThrow({
+      where: {
+        email,
+      },
+    })
   }
 }

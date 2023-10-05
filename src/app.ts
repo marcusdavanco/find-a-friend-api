@@ -9,6 +9,12 @@ export const app = fastify({
   querystringParser: (str) => parse(str.toLowerCase()),
 })
 
+/* TODO 
+app.register(fastifyJwt, {
+  secret: env.JWT_SECRET,
+})
+*/
+
 app.register(orgRoutes)
 app.register(petRoutes)
 

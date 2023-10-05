@@ -7,23 +7,14 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id            String  @id @default(uuid())
-  email         String  @unique
-  password_hash String
-  org           Org?    @relation(fields: [orgId], references: [id])
-  orgId         String?
-
-  @@map("users")
-}
-
 model Org {
-  id      String @id @default(uuid())
-  name    String
-  address String
-  phone   String
-  user    User[]
-  pets    Pet[]
+  id            String @id @default(uuid())
+  name          String
+  address       String
+  phone         String
+  email         String @unique
+  password_hash String
+  pets          Pet[]
 
   @@map("orgs")
 }

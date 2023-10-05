@@ -35,4 +35,16 @@ export class InMemoryOrgsRepository implements OrgsRepository {
       resolve(this.orgs[index])
     })
   }
+
+  async findByEmail(email: string): Promise<Org | null> {
+    return new Promise((resolve) => {
+      const index = this.orgs.findIndex((org) => org.email === email)
+
+      if (index === -1) {
+        resolve(null)
+      }
+
+      resolve(this.orgs[index])
+    })
+  }
 }
