@@ -23,7 +23,7 @@ export async function authenticate(
     })
 
     const token = await reply.jwtSign({
-      /* RBAC requires this and the property role in the entity model.
+      /* RBAC
       {
         role: user.role,
       },
@@ -34,7 +34,7 @@ export async function authenticate(
     })
 
     const refreshToken = await reply.jwtSign({
-      /* RBAC requires this and the property role in the entity model.
+      /* RBAC
       {
         role: user.role,
       },
