@@ -9,6 +9,8 @@ export class InMemoryOrgsRepository implements OrgsRepository {
     name,
     address,
     phone,
+    email,
+    password_hash,
   }: Prisma.OrgUncheckedCreateInput): Promise<Org> {
     return new Promise((resolve) => {
       const org = {
@@ -16,6 +18,8 @@ export class InMemoryOrgsRepository implements OrgsRepository {
         name,
         address,
         phone,
+        email,
+        password_hash,
       }
 
       this.orgs.push(org)
