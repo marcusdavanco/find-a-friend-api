@@ -1,4 +1,5 @@
 import { makeRegisterOrgsUseCase } from '@/use-cases/factories/make-register-orgs-use-case'
+import { hash } from 'bcryptjs'
 import { FastifyRequest, FastifyReply } from 'fastify'
 import { z } from 'zod'
 
@@ -7,9 +8,13 @@ export async function register(request: FastifyRequest, reply: FastifyReply) {
     name: z.string(),
     address: z.string(),
     phone: z.string(),
+    email: z.string(),
+    password: z.string(),
   })
 
-  const { name, address, phone } = registerBodySchema.parse(request.body)
+  const { name, address, phone, email, password } = registerBodySchema.parse(
+    request.body,
+  )
 
   try {
     const registerUseCase = makeRegisterOrgsUseCase()
@@ -18,6 +23,8 @@ export async function register(request: FastifyRequest, reply: FastifyReply) {
       name,
       address,
       phone,
+      email,
+      password,
     })
   } catch (err) {
     if (err instanceof Error) {
