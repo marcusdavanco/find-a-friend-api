@@ -4,16 +4,25 @@ import { env } from './env'
 import { parse } from 'node:querystring'
 import { petRoutes } from './http/controllers/pet/petRoutes'
 import { orgRoutes } from './http/controllers/org/routes'
+import fastifyJwt from '@fastify/jwt'
+import fastifyCookie from '@fastify/cookie'
 
 export const app = fastify({
   querystringParser: (str) => parse(str.toLowerCase()),
 })
 
-/* TODO 
 app.register(fastifyJwt, {
   secret: env.JWT_SECRET,
+  cookie: {
+    cookieName: 'refreshToken',
+    signed: false,
+  },
+  sign: {
+    expiresIn: '10m',
+  },
 })
-*/
+
+app.register(fastifyCookie)
 
 app.register(orgRoutes)
 app.register(petRoutes)
