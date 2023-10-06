@@ -12,7 +12,7 @@ export class PrismaOrgsRepository implements OrgsRepository {
   }
 
   async findById(id: string) {
-    return await prisma.org.findFirstOrThrow({
+    return await prisma.org.findFirst({
       where: {
         id,
       },
@@ -20,7 +20,7 @@ export class PrismaOrgsRepository implements OrgsRepository {
   }
 
   async findByEmail(email: string) {
-    return await prisma.org.findFirstOrThrow({
+    return await prisma.org.findFirst({
       where: {
         email,
       },

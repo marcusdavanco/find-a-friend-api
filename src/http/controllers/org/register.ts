@@ -1,5 +1,4 @@
 import { makeRegisterOrgsUseCase } from '@/use-cases/factories/make-register-orgs-use-case'
-import { hash } from 'bcryptjs'
 import { FastifyRequest, FastifyReply } from 'fastify'
 import { z } from 'zod'
 

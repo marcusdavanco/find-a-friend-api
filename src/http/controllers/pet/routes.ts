@@ -6,7 +6,7 @@ import { register } from './register'
 
 export async function petRoutes(app: FastifyInstance) {
   app.post('/pets', register)
-  app.get('/pets/:city', fetch)
+  app.get('/pets/city/:city', fetch)
   app.get('/pets/:pet', details)
   app.get('/pets/search', search)
 }

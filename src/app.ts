@@ -2,10 +2,10 @@ import fastify from 'fastify'
 import { ZodError } from 'zod'
 import { env } from './env'
 import { parse } from 'node:querystring'
-import { petRoutes } from './http/controllers/pet/petRoutes'
 import { orgRoutes } from './http/controllers/org/routes'
 import fastifyJwt from '@fastify/jwt'
 import fastifyCookie from '@fastify/cookie'
+import { petRoutes } from './http/controllers/pet/routes'
 
 export const app = fastify({
   querystringParser: (str) => parse(str.toLowerCase()),
