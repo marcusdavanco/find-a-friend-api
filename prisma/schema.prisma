@@ -55,8 +55,8 @@ model Pet {
   description  String?
   city         String
 
-  org       Org?    @relation(fields: [orgId], references: [id])
-  orgId     String?
+  org       Org     @relation(fields: [orgId], references: [id])
+  orgId     String
   available Boolean @default(true)
 
   @@map("pets")

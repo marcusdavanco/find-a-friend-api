@@ -3,28 +3,37 @@ import { FastifyRequest, FastifyReply } from 'fastify'
 import { z } from 'zod'
 
 export async function register(request: FastifyRequest, reply: FastifyReply) {
+  await request.jwtVerify({ onlyCookie: true })
+
   const registerBodySchema = z.object({
+    species: z.string(),
     name: z.string(),
-    age: z.number(),
-    breed: z.string(),
+    age: z.string(),
+    size: z.string(),
+    independency: z.string(),
     description: z.string().optional(),
     city: z.string(),
-    organizationId: z.string().optional(),
   })
 
-  const { name, age, breed, description, city, organizationId } =
+  const {
+    sign: { sub: orgId },
+  } = request.user
+
+  const { species, name, age, size, independency, description, city } =
     registerBodySchema.parse(request.body)
 
   try {
     const registerUseCase = makeRegisterPetsUseCase()
 
     await registerUseCase.execute({
+      species,
       name,
       age,
-      breed,
+      size,
+      independency,
       description,
       city,
-      organizationId,
+      orgId,
     })
   } catch (err) {
     if (err instanceof Error) {
