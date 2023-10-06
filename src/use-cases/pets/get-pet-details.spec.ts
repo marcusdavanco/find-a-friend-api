@@ -14,13 +14,14 @@ describe('Get Pets Use Case', () => {
 
   it('should be able to get a pet details', async () => {
     const newPet = await petsRepository.create({
-      name: 'Nova',
-      species: Species.CAT,
-      size: Size.PEQUENO,
-      age: Age.FILHOTE,
-      independency: Independency.BAIXO,
+      name: 'Rocco',
+      age: 'filhote',
+      size: 'pequeno',
+      independency: 'baixo',
+      species: 'dog',
       city: 'carapicuiba',
-      description: 'black.',
+      description: 'black with a white spot.',
+      orgId: 'find-a-friend-org',
     })
 
     const { pet } = await sut.execute({ id: newPet.id })
