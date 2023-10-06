@@ -1,7 +1,6 @@
 import { InMemoryPetsRepository } from '@/repositories/in-memory.ts/in-memory-repository'
 import { SearchPetsUseCase } from './search-pets'
 import { beforeEach, describe, expect, it } from 'vitest'
-import { Age, Independency, Size, Species } from '@prisma/client'
 
 let petsRepository: InMemoryPetsRepository
 let sut: SearchPetsUseCase
@@ -15,22 +14,24 @@ describe('Search pet UseCase', () => {
   it('should be able to search by pet characteristics.', async () => {
     await petsRepository.create({
       name: 'munchkin',
-      species: Species.CAT,
-      size: Size.PEQUENO,
-      age: Age.FILHOTE,
-      independency: Independency.BAIXO,
+      species: 'CAT',
+      size: 'PEQUENO',
+      age: 'FILHOTE',
+      independency: 'BAIXO',
       city: 'carapicuiba',
       description: 'white and tabby.',
+      orgId: 'find-a-friend-org',
     })
 
     await petsRepository.create({
       name: 'maine coon',
-      species: Species.CAT,
-      size: Size.GRANDE,
-      age: Age.JOVEM,
-      independency: Independency.BAIXO,
+      species: 'CAT',
+      size: 'GRANDE',
+      age: 'JOVEM',
+      independency: 'BAIXO',
       city: 'carapicuiba',
       description: 'gray.',
+      orgId: 'find-a-friend-org',
     })
 
     const { pets } = await sut.execute({
@@ -46,23 +47,25 @@ describe('Search pet UseCase', () => {
     for (let i = 1; i <= 22; i++) {
       await petsRepository.create({
         name: `small-cat-${i}`,
-        species: Species.CAT,
-        size: Size.PEQUENO,
-        age: Age.FILHOTE,
-        independency: Independency.BAIXO,
+        species: 'CAT',
+        size: 'PEQUENO',
+        age: 'FILHOTE',
+        independency: 'BAIXO',
         city: 'carapicuiba',
         description: 'white and tabby.',
+        orgId: 'find-a-friend-org',
       })
     }
 
     await petsRepository.create({
       name: 'maine coon',
-      species: Species.CAT,
-      size: Size.GRANDE,
-      age: Age.JOVEM,
-      independency: Independency.BAIXO,
+      species: 'CAT',
+      size: 'GRANDE',
+      age: 'JOVEM',
+      independency: 'BAIXO',
       city: 'carapicuiba',
       description: 'gray.',
+      orgId: 'find-a-friend-org',
     })
 
     const { pets } = await sut.execute({

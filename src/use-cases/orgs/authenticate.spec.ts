@@ -30,7 +30,7 @@ describe('Authenticate Use Case', () => {
     expect(org.id).toEqual(expect.any(String))
   })
 
-  it.skip('should not be able to authenticate with wrong email', async () => {
+  it('should not be able to authenticate with wrong email', async () => {
     await orgsRepository.create({
       name: 'Legatum',
       address: 'Rua Ali Perto, 123',
@@ -47,7 +47,7 @@ describe('Authenticate Use Case', () => {
     ).rejects.toBeInstanceOf(InvalidCredentialsError)
   })
 
-  it.skip('should not be able to authenticate with wrong password', async () => {
+  it('should not be able to authenticate with wrong password', async () => {
     await orgsRepository.create({
       name: 'Legatum',
       address: 'Rua Ali Perto, 123',

@@ -1,7 +1,6 @@
 import { InMemoryPetsRepository } from '@/repositories/in-memory.ts/in-memory-repository'
 import { describe, expect, it, beforeEach } from 'vitest'
 import { FetchPetsUseCase } from './fetch-pets'
-import { Age, Independency, Size, Species } from '@prisma/client'
 
 let petsRepository: InMemoryPetsRepository
 let sut: FetchPetsUseCase
@@ -15,32 +14,35 @@ describe('Fetch Pets Use Case', () => {
   it('should be able to fetch a list of pets by city', async () => {
     await petsRepository.create({
       name: 'Sofia',
-      species: Species.CAT,
-      size: Size.PEQUENO,
-      age: Age.FILHOTE,
-      independency: Independency.BAIXO,
+      species: 'CAT',
+      size: 'PEQUENO',
+      age: 'FILHOTE',
+      independency: 'BAIXO',
       city: 'carapicuiba',
       description: 'white and tabby.',
+      orgId: 'find-a-friend-org',
     })
 
     await petsRepository.create({
       name: 'Samuel',
-      species: Species.CAT,
-      size: Size.PEQUENO,
-      age: Age.FILHOTE,
-      independency: Independency.BAIXO,
+      species: 'CAT',
+      size: 'PEQUENO',
+      age: 'FILHOTE',
+      independency: 'BAIXO',
       city: 'carapicuiba',
       description: 'white and tabby.',
+      orgId: 'find-a-friend-org',
     })
 
     await petsRepository.create({
       name: 'Pepe',
-      species: Species.CAT,
-      size: Size.PEQUENO,
-      age: Age.FILHOTE,
-      independency: Independency.BAIXO,
+      species: 'CAT',
+      size: 'PEQUENO',
+      age: 'FILHOTE',
+      independency: 'BAIXO',
       city: 'sao paulo',
       description: 'siamese.',
+      orgId: 'find-a-friend-org',
     })
 
     const { pets } = await sut.execute({ city: 'carapicuiba', page: 1 })
@@ -52,12 +54,13 @@ describe('Fetch Pets Use Case', () => {
     for (let i = 1; i <= 22; i++) {
       await petsRepository.create({
         name: `pet-${i}`,
-        species: Species.CAT,
-        size: Size.PEQUENO,
-        age: Age.FILHOTE,
-        independency: Independency.BAIXO,
+        species: 'CAT',
+        size: 'PEQUENO',
+        age: 'FILHOTE',
+        independency: 'BAIXO',
         city: 'carapicuiba',
         description: `pet number ${i}`,
+        orgId: 'find-a-friend-org',
       })
     }
 

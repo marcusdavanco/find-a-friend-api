@@ -1,5 +1,5 @@
 import { PetsRepository } from '@/repositories/pet-repository'
-import { DetailStringToEnumConverter } from './converters/detail-string-to-enum-converter'
+import { DetailStringToEnumConverter } from '@/utils/detail-string-to-enum-converter'
 
 interface RegisterPetUseCaseRequest {
   species: string

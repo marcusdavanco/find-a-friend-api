@@ -1,8 +1,11 @@
 import { prisma } from '@/lib/prisma'
-import { Age, Independency, Prisma, Size, Species } from '@prisma/client'
+import { Prisma } from '@prisma/client'
 import { PetsRepository, QueryParams } from '../pet-repository'
+import { DetailStringToEnumConverter } from '@/utils/detail-string-to-enum-converter'
 
 export class PrismaPetsRepository implements PetsRepository {
+  private converter = new DetailStringToEnumConverter()
+
   async findById(id: string) {
     const pet = await prisma.pet.findFirstOrThrow({
       where: {
@@ -40,15 +43,19 @@ export class PrismaPetsRepository implements PetsRepository {
 
     const { size, age, species, independency } = query
 
+    const sizeValue = this.converter.sizeMap.get(size)
+    const ageValue = this.converter.ageMap.get(age)
+    const speciesValue = this.converter.speciesMap.get(species)
+    const independencyValue = this.converter.independencyMap.get(independency)
+
     const pets = await prisma.pet.findMany({
       where: {
         OR: [
-          { size: Size[size as keyof typeof Size] },
-          { age: Age[age as keyof typeof Age] },
-          { species: Species[species as keyof typeof Species] },
+          { size: sizeValue },
+          { age: ageValue },
+          { species: speciesValue },
           {
-            independency:
-              Independency[independency as keyof typeof Independency],
+            independency: independencyValue,
           },
         ],
         AND: {
