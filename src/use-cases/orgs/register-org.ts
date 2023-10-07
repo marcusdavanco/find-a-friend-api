@@ -23,7 +23,6 @@ export class RegisterOrgUseCase {
     const password_hash = await hash(password, 6)
 
     const orgWithSameEmail = await this.orgsRepository.findByEmail(email)
-    console.log(orgWithSameEmail)
 
     if (orgWithSameEmail) {
       throw new OrgsAlreadyExistsError()
