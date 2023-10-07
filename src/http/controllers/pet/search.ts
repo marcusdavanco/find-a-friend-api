@@ -8,18 +8,21 @@ export async function search(request: FastifyRequest, reply: FastifyReply) {
   })
 
   const searchPetsQuerySchema = z.object({
-    q: z.record(z.string()),
+    q: z.string(), // Change this to expect a JSON string
     page: z.coerce.number().min(1).default(1),
   })
 
   const { city } = searchPetsQueryParams.parse(request.params)
+
+  // Parse the JSON string into an object
   const { q, page } = searchPetsQuerySchema.parse(request.query)
+  const query = JSON.parse(q || '{}') // Parse q as a JSON string
 
   try {
     const searchPetsUseCase = makeSearchPetsUseCase()
 
     const { pets } = await searchPetsUseCase.execute({
-      query: q,
+      query,
       city,
       page,
     })
